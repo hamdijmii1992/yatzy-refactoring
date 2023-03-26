@@ -79,25 +79,21 @@ public class Yatzy {
     }
 
     public int threeOfaKind() {
-	Map<Integer, Long> frequencies = IntStream.of(dice).boxed()
-		.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-	Stream<Integer> threeOfaKindStream = frequencies.entrySet().stream().filter(entry -> entry.getValue() >= 3)
-		.map(entry -> entry.getKey());
-	return 3 * threeOfaKindStream.findFirst().orElse(0);
+	return 3 * ofaKind(3);
     }
 
-    public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5) {
-	int[] tallies;
-	tallies = new int[6];
-	tallies[_1 - 1]++;
-	tallies[_2 - 1]++;
-	tallies[d3 - 1]++;
-	tallies[d4 - 1]++;
-	tallies[d5 - 1]++;
-	for (int i = 0; i < 6; i++)
-	    if (tallies[i] >= 4)
-		return (i + 1) * 4;
-	return 0;
+    public int fourOfaKind() {
+	return 4 * ofaKind(4);
+    }
+
+    private int ofaKind(int frequency) {
+	Map<Integer, Long> frequencies = calculateFrequencies();
+	return frequencies.entrySet().stream().filter(entry -> entry.getValue() >= frequency)
+		.map(entry -> entry.getKey()).findFirst().orElse(0);
+    }
+
+    private Map<Integer, Long> calculateFrequencies() {
+	return IntStream.of(dice).boxed().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public static int score_pair(int d1, int d2, int d3, int d4, int d5) {

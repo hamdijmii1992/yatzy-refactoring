@@ -121,10 +121,14 @@ public class YatzyTest {
     }
 
     @Test
-    public void four_of_a_knd() {
-	assertEquals(12, Yatzy.four_of_a_kind(3, 3, 3, 3, 5));
-	assertEquals(20, Yatzy.four_of_a_kind(5, 5, 5, 4, 5));
-	assertEquals(12, Yatzy.four_of_a_kind(3, 3, 3, 3, 3));
+    public void testFourOfaKind() {
+	int expected = 0;
+	int actual = new Yatzy(3, 3, 2, 3, 5).fourOfaKind();
+	assertEquals(expected, actual);
+	assertEquals(12, new Yatzy(3, 3, 3, 3, 5).fourOfaKind());
+	assertEquals(20, new Yatzy(5, 5, 5, 4, 5).fourOfaKind());
+	assertEquals(12, new Yatzy(3, 3, 3, 3, 3).fourOfaKind());
+	assertEquals(4, new Yatzy(2, 1, 1, 1, 1).fourOfaKind());
     }
 
     @Test
