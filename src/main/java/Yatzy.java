@@ -82,35 +82,30 @@ public class Yatzy {
     }
 
     public int threeOfaKind() {
-	return 3 * ofaKind(3);
+	return 3 * ofaKind(3).findFirst().orElse(0);
     }
 
     public int fourOfaKind() {
-	return 4 * ofaKind(4);
-    }
-
-    private int ofaKind(int frequency) {
-	Map<Integer, Long> frequencies = calculateFrequencies();
-	return frequencies.entrySet().stream().filter(entry -> entry.getValue() >= frequency)
-		.map(entry -> entry.getKey()).findFirst().orElse(0);
+	return 4 * ofaKind(4).findFirst().orElse(0);
     }
 
     public int pair() {
-	Optional<Integer> maxPair = twoDiceMatching().sorted(Comparator.reverseOrder()).findFirst();
+	Optional<Integer> maxPair = ofaKind(2).sorted(Comparator.reverseOrder()).findFirst();
 	return 2 * maxPair.orElse(0);
     }
 
     public int twoPair() {
-	List<Integer> twoPairDice = twoDiceMatching().collect(Collectors.toList());
+	List<Integer> twoPairDice = ofaKind(2).collect(Collectors.toList());
 	if (twoPairDice.size() == 2) {
 	    return twoPairDice.stream().mapToInt(d -> d).sum() * 2;
 	}
 	return 0;
     }
 
-    private Stream<Integer> twoDiceMatching() {
+    private Stream<Integer> ofaKind(int frequency) {
 	Map<Integer, Long> frequencies = calculateFrequencies();
-	return frequencies.entrySet().stream().filter(entry -> entry.getValue() >= 2).map(entry -> entry.getKey());
+	return frequencies.entrySet().stream().filter(entry -> entry.getValue() >= frequency)
+		.map(entry -> entry.getKey());
     }
 
     private Map<Integer, Long> calculateFrequencies() {
