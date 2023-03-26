@@ -4,6 +4,16 @@ import org.junit.Test;
 
 public class YatzyTest {
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testDiceValueLowerThanOne() {
+	new Yatzy(2, 1, 0, 2, 4);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDiceValueGreaterThanSix() {
+	new Yatzy(2, 1, 8, 2, 4);
+    }
+
     @Test
     public void test_1s() {
 	assertTrue(Yatzy.ones(1, 2, 3, 4, 5) == 1);
