@@ -92,10 +92,12 @@ public class YatzyTest {
     }
 
     @Test
-    public void smallStraight() {
-	assertEquals(15, Yatzy.smallStraight(1, 2, 3, 4, 5));
-	assertEquals(15, Yatzy.smallStraight(2, 3, 4, 5, 1));
-	assertEquals(0, Yatzy.smallStraight(1, 2, 2, 4, 5));
+    public void testSmallStraight() {
+	int expected = 0;
+	int actual = new Yatzy(1, 2, 2, 4, 5).smallStraight();
+	assertEquals(expected, actual);
+	assertEquals(15, new Yatzy(1, 2, 3, 4, 5).smallStraight());
+	assertEquals(15, new Yatzy(2, 3, 4, 5, 1).smallStraight());
     }
 
     @Test
