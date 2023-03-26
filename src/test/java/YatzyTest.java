@@ -102,26 +102,29 @@ public class YatzyTest {
 
     @Test
     public void testLargeStraight() {
-      int expected = 0;
-      int actual = new Yatzy(1, 2, 2, 4, 5).largeStraight();
-      assertEquals(expected, actual);
-      assertEquals(20, new Yatzy(6, 2, 3, 4, 5).largeStraight());
-      assertEquals(20, new Yatzy(2, 3, 4, 5, 6).largeStraight());
+	int expected = 0;
+	int actual = new Yatzy(1, 2, 2, 4, 5).largeStraight();
+	assertEquals(expected, actual);
+	assertEquals(20, new Yatzy(6, 2, 3, 4, 5).largeStraight());
+	assertEquals(20, new Yatzy(2, 3, 4, 5, 6).largeStraight());
     }
-    
 
     @Test
-    public void three_of_a_kind() {
-	assertEquals(9, Yatzy.three_of_a_kind(3, 3, 3, 4, 5));
-	assertEquals(15, Yatzy.three_of_a_kind(5, 3, 5, 4, 5));
-	assertEquals(9, Yatzy.three_of_a_kind(3, 3, 3, 3, 5));
+    public void testThreeOfaKind() {
+	int expected = 0;
+	int actual = new Yatzy(3, 2, 3, 4, 5).threeOfaKind();
+	assertEquals(expected, actual);
+	assertEquals(9, new Yatzy(3, 3, 3, 4, 5).threeOfaKind());
+	assertEquals(15, new Yatzy(5, 3, 5, 4, 5).threeOfaKind());
+	assertEquals(9, new Yatzy(3, 3, 3, 3, 5).threeOfaKind());
+	assertEquals(6, new Yatzy(2, 2, 2, 3, 5).threeOfaKind());
     }
 
     @Test
     public void four_of_a_knd() {
 	assertEquals(12, Yatzy.four_of_a_kind(3, 3, 3, 3, 5));
 	assertEquals(20, Yatzy.four_of_a_kind(5, 5, 5, 4, 5));
-	assertEquals(9, Yatzy.three_of_a_kind(3, 3, 3, 3, 3));
+	assertEquals(12, Yatzy.four_of_a_kind(3, 3, 3, 3, 3));
     }
 
     @Test

@@ -1,5 +1,9 @@
+import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Yatzy {
 
@@ -74,18 +78,12 @@ public class Yatzy {
 	return (IntStream.of(dice).distinct().boxed().filter(predicate).count() == 5);
     }
 
-    public static int three_of_a_kind(int d1, int d2, int d3, int d4, int d5) {
-	int[] t;
-	t = new int[6];
-	t[d1 - 1]++;
-	t[d2 - 1]++;
-	t[d3 - 1]++;
-	t[d4 - 1]++;
-	t[d5 - 1]++;
-	for (int i = 0; i < 6; i++)
-	    if (t[i] >= 3)
-		return (i + 1) * 3;
-	return 0;
+    public int threeOfaKind() {
+	Map<Integer, Long> frequencies = IntStream.of(dice).boxed()
+		.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+	Stream<Integer> threeOfaKindStream = frequencies.entrySet().stream().filter(entry -> entry.getValue() >= 3)
+		.map(entry -> entry.getKey());
+	return 3 * threeOfaKindStream.findFirst().orElse(0);
     }
 
     public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5) {
