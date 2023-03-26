@@ -16,79 +16,32 @@ public class Yatzy {
 	dice[4] = d5;
     }
 
-    public static int ones(int d1, int d2, int d3, int d4, int d5) {
-	int sum = 0;
-	if (d1 == 1)
-	    sum++;
-	if (d2 == 1)
-	    sum++;
-	if (d3 == 1)
-	    sum++;
-	if (d4 == 1)
-	    sum++;
-	if (d5 == 1)
-	    sum++;
-
-	return sum;
+    public int ones() {
+	return sumOf(1);
     }
 
-    public static int twos(int d1, int d2, int d3, int d4, int d5) {
-	int sum = 0;
-	if (d1 == 2)
-	    sum += 2;
-	if (d2 == 2)
-	    sum += 2;
-	if (d3 == 2)
-	    sum += 2;
-	if (d4 == 2)
-	    sum += 2;
-	if (d5 == 2)
-	    sum += 2;
-	return sum;
+    public int twos() {
+	return sumOf(2);
     }
 
-    public static int threes(int d1, int d2, int d3, int d4, int d5) {
-	int s;
-	s = 0;
-	if (d1 == 3)
-	    s += 3;
-	if (d2 == 3)
-	    s += 3;
-	if (d3 == 3)
-	    s += 3;
-	if (d4 == 3)
-	    s += 3;
-	if (d5 == 3)
-	    s += 3;
-	return s;
+    public int threes() {
+	return sumOf(3);
     }
 
     public int fours() {
-	int sum;
-	sum = 0;
-	for (int at = 0; at != 5; at++) {
-	    if (dice[at] == 4) {
-		sum += 4;
-	    }
-	}
-	return sum;
+	return sumOf(4);
     }
 
     public int fives() {
-	int s = 0;
-	int i;
-	for (i = 0; i < dice.length; i++)
-	    if (dice[i] == 5)
-		s = s + 5;
-	return s;
+	return sumOf(5);
     }
 
     public int sixes() {
-	int sum = 0;
-	for (int at = 0; at < dice.length; at++)
-	    if (dice[at] == 6)
-		sum = sum + 6;
-	return sum;
+	return sumOf(6);
+    }
+
+    private int sumOf(int die) {
+	return IntStream.of(dice).filter(d -> d == die).sum();
     }
 
     public static int chance(int d1, int d2, int d3, int d4, int d5) {
