@@ -153,7 +153,14 @@ public class YatzyTest {
 
     @Test
     public void fullHouse() {
-	assertEquals(18, Yatzy.fullHouse(6, 2, 2, 2, 6));
-	assertEquals(0, Yatzy.fullHouse(2, 3, 4, 5, 6));
+	int expected = 0;
+	int actual = new Yatzy(2, 3, 4, 5, 6).fullHouse();
+	assertEquals(expected, actual);
+	assertEquals(0, new Yatzy(1, 2, 2, 2, 6).fullHouse());
+	assertEquals(0, new Yatzy(4, 4, 4, 4, 4).fullHouse());
+	assertEquals(0, new Yatzy(2, 2, 3, 3, 4).fullHouse());
+	assertEquals(18, new Yatzy(6, 2, 2, 2, 6).fullHouse());
+	assertEquals(17, new Yatzy(3, 3, 3, 4, 4).fullHouse());
+	assertEquals(7, new Yatzy(1, 2, 1, 2, 1).fullHouse());
     }
 }
